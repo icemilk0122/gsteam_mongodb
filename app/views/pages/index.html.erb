@@ -1,0 +1,161 @@
+<!-- desktop and tablet -->
+<div class="hidden-phone">  
+  <!--[if lt IE 9]>
+<link href="/css/ie8fix.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.gradient {
+filter: none;
+}
+</style>
+<![endif]-->
+  <style>
+    .fixnav{display:none;}
+  </style>
+  <!-- NAVBAR-->
+  <nav class="covernav">
+    <div class="logo"><img src="/images/gsteam_s.png"/></div>
+    <div class="dropdown  nav">
+      <% if current_user %>
+      <%= link_to(current_user.name, edit_registration_path(:user)) %> | 
+      <% if current_user.role == "admin" %>
+      <a href="/admin" target="gsteamadmin">控制台</a> | 
+      <% end %>
+      <%= link_to('登出', destroy_user_session_path, :method => :delete) %>
+      <% else %>
+      <a class="dropdown-toggle" href="javascript:void(0)">登入</a>
+      <% end %>
+      <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+        <%= form_for("user", :url => user_session_path) do |f| %>
+        <%= f.text_field :email, :placeholder => "請輸入Email" %>
+        <%= f.password_field :password, :placeholder => "請輸入密碼" %>
+        <%= f.check_box :remember_me, :id => "rememberme" %><label for="rememberme" id="remembermelabel">記住帳號密碼</label>
+        <%= f.submit '登入', :class => "btn btn-primary btn-block" %>
+        <%= link_to "Forgot your password?", new_password_path('user') %>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+  <!-- end NAVBAR -->
+  <div class="container-narrow">
+    <div id="intro">
+      <div class="story">
+        <div class="largetitle">
+          <div class="text-white-bg">我們相信經由一小群人的持續努力</div>
+          <div class="text-white-bg">可以改變整個世界</div>
+        </div>
+        <!-- Carousel================================================== -->
+        <div class="timelineLoader">
+          <img src="images/loadingAnimation.gif" />
+        </div>
+        <!-- BEGIN CARD -->
+        <div class="timelineCard tl">
+          <div class="mask2">
+          </div>
+          <!--<div class="mask"></div>-->
+          <div class="item" data-id="17/04/2010" data-description="東京巨蛋年會">
+            <a href="#"class="image_rollover_bottom">
+              <img src="<%= @photourl %>5.jpg" alt=""/>
+            </a>
+          </div>
+          
+          <div class="item" data-id="19/06/2012" data-description="橫濱巨蛋年會">
+            <a href="#"class="image_rollover_bottom">
+              <img src="<%= @photourl %>8.jpg" alt=""/>
+            </a>
+          </div>
+          
+          <div class="item" data-id="19/04/2012" data-description="Neways U 研習">
+            <a href="#"class="image_rollover_bottom">
+              <img src="<%= @photourl %>13.jpg" alt=""/>
+            </a>
+          </div>
+          
+          <div class="item" data-id="19/04/2012" data-description="Neways美國行">
+            <a href="#"class="image_rollover_bottom">
+              <img src="<%= @photourl %>14.jpg" alt=""/>
+            </a>
+          </div>
+        </div> <!-- END timeline -->
+        <div class="menu">
+          <% if current_user %>
+          <a href="/proof">見證</a>
+          <% end %>
+        </div>
+      </div><!--end story-->
+    </div><!-- end intro -->
+    <div id="second">
+      <div class="story">
+        <!-- FOOTER -->
+        <footer>
+          <p class="privacy">&copy; 2013 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </footer>
+      </div>
+    </div><!-- end second -->
+  </div><!-- end container -->
+  <!-- Le javascript
+================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript">
+    $(window).load(function() {
+      // light
+      $('.timelineCard').timeline({
+        itemMargin : 10,
+        startItem : '19/06/2012',
+        hideTimeline : true
+      });
+      $('#intro').parallax("50%", 0.1);
+      $('#second').parallax("50%", 0.3);
+      //Handles menu drop down
+      /*$('.dropdown-menu').find('form').click(function (e) {
+			e.stopPropagation();
+		});*/
+      $(".covernav .dropdown-toggle").click(function(e) {
+        $('.covernav .dropdown-menu').toggle();
+      });
+      $(".fixnav .dropdown-toggle").click(function(e) {
+        $('.fixnav .dropdown-menu').toggle();
+      });
+      $(window).scroll(function(){
+        if($(".menubtn").css("display") == "none")
+        {
+          var scrollTop = 500;
+          if($(window).scrollTop() >= scrollTop){
+            $('.fixnav').show();
+          }
+          if($(window).scrollTop() < scrollTop){
+            $('.fixnav').hide();
+          }
+        }
+      })
+      $(".t_left").click(function(){$(".largetitle").hide();});
+      $(".t_right").click(function(){$(".largetitle").hide();});
+    }); 
+  </script>
+</div>
+<!-- desktop and tablet -->
+<!-- phone -->
+<div class="visible-phone container">
+  <% unless current_user %>
+  <div class="row">
+    <div class="span4 offset4">
+      <div><img src="/images/gsteam_s.png"/></div>
+      <legend>會員登入</legend>
+      <div class="alert alert-error hide">
+        <a class="close" data-dismiss="alert" href="#">×</a>Incorrect Username or Password!
+      </div>
+      <%= form_for("user", :url => user_session_path) do |f| %>
+      <%= f.text_field :email, :placeholder => "請輸入Email", :class => "span4" %>
+      <%= f.password_field :password, :placeholder => "請輸入密碼", :class => "span4" %>
+      <%= f.check_box :remember_me, :id => "rememberme" %><label for="rememberme" id="remembermelabel">記住帳號密碼</label>
+      <%= f.submit '登入', :class => "btn btn-primary btn-block" %>
+      <%= link_to "Forgot your password?", new_password_path('user') %>
+      <% end %>
+    </div>
+  </div>
+  <% else %>
+  <script type="text/javascript">
+    //window.location = "/proof"
+  </script>
+  <% end %>
+</div>
+<!-- phone -->

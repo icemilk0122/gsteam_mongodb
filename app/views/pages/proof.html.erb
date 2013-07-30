@@ -1,0 +1,131 @@
+<style>
+  .proofcontaier{
+  }
+  #categories li{
+    float: left;
+    font-size: 12px;
+    height: 150px;
+    margin: 0 15px 15px 0;
+    position: relative;
+    width: 200px; 
+  }
+  li a{
+    color: #112233;
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  li h2 {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    font-size: 18px;
+    height: 38px;
+    margin: 0;
+    padding: 5px 15px 10px;
+    position: absolute;
+    width: 170px;
+  }  
+  #categories li > a h2 {
+    color: #FFFFFF;
+  }
+  #categories li > a h2:hover {
+    color: #44BBFF;
+  }
+  #categories .cate{
+    background: url("/images/headche.jpg") no-repeat scroll 0px 0px transparent;
+  }
+  .videolist_block{
+    background-color: #fff;
+    padding: 10px;
+  }
+</style>
+<div class="proofcontaier container">
+  <div class="row">
+    <div class="span12 result">
+      <!--form id="custom-search-form" class="form-search form-horizontal">
+        <div class="input-append span12">
+          <input type="text" class="search-query" placeholder="Search">
+          <button type="submit" class="btn"><i class="icon-search"></i></button>
+        </div>
+      </form-->
+      <ul id="categories">
+        <li class="cate  en">
+          <a href="/categories/activism">
+            <h2>我的清單</h2>
+          </a>
+        </li>
+        <li class="cate  en">
+          <a href="javascript:void(0)" onclick="listcate(1)">
+            <h2>皮膚相關</h2>
+          </a>
+        </li>
+        <li class="cate en">
+          <a href="javascript:void(0)" onclick="listcate(2)">
+            <h2>腸胃相關</h2>
+          </a>
+        </li>
+        <li class="cate  en">
+          <a href="javascript:void(0)" onclick="listcate(3)">
+            <h2>偏頭痛</h2>
+          </a>
+        </li>
+         <li class="cate  en">
+          <a href="javascript:void(0)" onclick="listcate(4)">
+            <h2>過敏</h2>
+          </a>
+        </li>
+        <li class="cate  en">
+          <a href="javascript:void(0)" onclick="listcate(5)">
+            <h2>高血壓</h2>
+          </a>
+        </li>
+        <li class="cate en">
+          <a href="javascript:void(0)" onclick="listcate(6)">
+            <h2>糖尿病</h2>
+          </a>
+        </li>
+        <li class="cate en">
+          <a href="javascript:void(0)" onclick="listcate(7)">
+            <h2>腫瘤相關</h2>
+          </a>
+        </li>
+        <li class="cate en">
+          <a href="javascript:void(0)" onclick="listcate(0)">
+            <h2>全部</h2>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script id="videolist-template" type="text/x-handlebars-template">
+  <div class='videolist_block textleft' onclick='javascript:location.href="/proof/player?videoid={{videoid}}"'>
+      <p>{{name}} {{age}}歲</p>
+      <p class="cate"><a href="javascript:void(0)" onclick="listcate({{cate}})">分類{{cate}}</a></p>
+      <div class="left"><img src='http://img.youtube.com/vi/{{videoid}}/default.jpg'></div>
+      <div class="right hidden-phone">
+          {{desc}}
+      </div>
+      <div class="clear">
+  </div>
+</script>
+<script type="text/javascript">
+  function listcate(cate)
+  {
+    $.ajax({
+      type: "GET",
+      url: "/proof/list",
+      data: {cateid:cate},
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      error: function () {
+    },
+      complete: function (data) {
+        var source   = $("#videolist-template").html();
+        var template = Handlebars.compile(source);
+        var html    = template(data.responseJSON);
+        $(".result").html(html);
+    }
+  });
+  }
+</script>

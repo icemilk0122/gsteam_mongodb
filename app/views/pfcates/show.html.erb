@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @pfcate.id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @pfcate.name %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @pfcate.note %>
+</p>
+
+<%= link_to 'Edit', edit_pfcate_path(@pfcate) %> |
+<%= link_to 'Back', pfcates_path %>

@@ -1,0 +1,31 @@
+<h1>Listing pfcates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Note</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pfcates.each do |pfcate| %>
+      <tr>
+        <td><%= pfcate.id %></td>
+        <td><%= pfcate.name %></td>
+        <td><%= pfcate.note %></td>
+        <td><%= link_to 'Show', pfcate %></td>
+        <td><%= link_to 'Edit', edit_pfcate_path(pfcate) %></td>
+        <td><%= link_to 'Destroy', pfcate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pfcate', new_pfcate_path %>

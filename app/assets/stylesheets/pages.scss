@@ -1,0 +1,44 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.fixnav {
+  background-color:#000;
+  position:fixed;
+  top:0;
+  line-height:100%;
+  padding:5px 0;
+  .logo{
+    > img {
+      height:36px;
+    }
+  }
+  .dropdown-menu{
+    top:190%; 
+  }
+}
+.menubtn {
+  margin:10px;
+  float:right;
+  p{
+    background-color:#fff;
+    width:25px;
+    height:3px;
+    display:block;
+    margin-bottom:5px;
+  }
+}
+.mobilemenu{
+  display:none;
+  hr{
+    border:0; height:1px; background-color:#333;
+    color:#333	/* IE6 */
+  } 
+}
+.container{
+  margin: 80px auto 0;
+}
+.left{float:left;}
+.right{float:right;}
+.textleft{text-align:left;}
+.textright{text-align:right;}
+.clear{clear:both;}

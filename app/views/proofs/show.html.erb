@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Videoid:</strong>
+  <%= @proof.videoid %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @proof.name %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @proof.age %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @proof.desc %>
+</p>
+
+<p>
+  <strong>Cate:</strong>
+  <%= @proof.cate %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @proof.date %>
+</p>
+
+<%= link_to 'Edit', edit_proof_path(@proof) %> |
+<%= link_to 'Back', proofs_path %>

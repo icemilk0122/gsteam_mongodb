@@ -1,0 +1,43 @@
+<%= simple_form_for(@proof) do |f| %>
+  <% if @proof.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@proof.errors.count, "error") %> prohibited this proof from being saved:</h2>
+
+      <ul>
+      <% @proof.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :videoid %><br>
+    <%= f.text_field :videoid %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :age %><br>
+    <%= f.text_field :age %>
+  </div>
+  <div class="field">
+    <%= f.label :desc %><br>
+    <%= f.text_field :desc %>
+  </div>
+  <div class="field">
+    <%= f.label :cate %><br>
+    <%= f.text_field :cate %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.input :date, as: :date, start_year: Date.today.year - 90,
+end_year: Date.today.year - 12, discard_day: false,use_month_numbers: true,
+order: [:year, :month, :day] %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

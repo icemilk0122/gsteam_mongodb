@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gsteam</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0;">
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <nav class="fixnav">
+      <%= link_to image_tag('/images/gsteam_s.png'), url_for(root_path), :class => "logo"  %>
+      <div class="dropdown  nav hidden-phone">
+        <% if current_user %>
+          <a href="/proof">見證</a> |
+          <%= link_to(current_user.name, edit_registration_path(:user), :class => "navusername") %> |
+          <% if current_user.role == "admin" %>
+          <a href="/admin" target="gsteamadmin">控制台</a> | 
+          <% end %>
+          <%= link_to('登出', destroy_user_session_path, :method => :delete) %>
+        <% else %>
+          <a class="dropdown-toggle" href="javascript:void(0)">登入</a>
+        <% end %>
+        <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+          <%= form_for("user", :url => user_session_path) do |f| %>
+          <%= f.text_field :email, :placeholder => "請輸入Email" %>
+          <%= f.password_field :password, :placeholder => "請輸入密碼" %>
+          <%= f.check_box :remember_me, :id => "rememberme" %><label for="rememberme" id="remembermelabel">記住帳號密碼</label>
+          <%= f.submit '登入', :class => "btn btn-primary btn-block" %>
+          <%= link_to "Forgot your password?", new_password_path('user') %>
+          <% end %>
+        </div>
+      </div>
+      <div class="visible-phone">
+        <div class="menubtn">
+          <p></p>
+          <p></p>
+          <p></p>
+        </div>
+        <div class="mobilemenu clear textright">
+        <% if current_user %>
+          <hr>
+          <%= link_to(current_user.name, edit_registration_path(:user), :class => "navusername") %>
+          <hr>
+          <a href="/proof">見證</a>
+          <hr>
+          <%= link_to('登出', destroy_user_session_path, :method => :delete) %>
+          <hr>
+        <%end%>
+        </div>
+      </div>
+    </nav>
+    <%= yield %>
+    
+  </body>
+  <script type="text/javascript">
+    $(".menubtn").click(function(e){
+      $(".mobilemenu").toggle();
+    });
+  </script>
+</html>
